@@ -1,0 +1,38 @@
+# version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: email_api
+    env_file:
+      - .env
+    ports:
+      - "18000:8000"
+    depends_on:
+      - db
+      - mailhog
+    #volumes:
+      #- ./app:/app
+
+  db:
+    image: postgres:14
+    container_name: email_db
+    restart: always
+    environment:
+      POSTGRES_DB: email_service
+      POSTGRES_USER: email_user
+      POSTGRES_PASSWORD: email_pass
+    ports:
+      - "15432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+
+volumes:
+  pgdata: 

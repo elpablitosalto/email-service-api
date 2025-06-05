@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+asyncpg
+pydantic
+python-dotenv
+aiosmtplib
+httpx
+loguru
+pytest
+pytest-asyncio
+python-multipart 
+email-validator
